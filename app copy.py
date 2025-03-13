@@ -6,12 +6,17 @@ OLLAMA_URL = "http://localhost:11434/v1/chat/completions"
 
 # Store model name globally
 MODEL_NAME = "llama3.2:1b"
-# MODEL_NAME = "deepseek-coder:latest"
+
+# Configure the avatar once at the module level
+@cl.set_avatar
+def avatar_setup():
+    # Return the URL or path to your avatar image
+    return "https://blessl.in/assets/img/logo/logo.png"
 
 @cl.on_chat_start
 async def start():
     # Use the global model name
-    await cl.Message(content=f"Welcome to Blessl Ai Chat ! I am {MODEL_NAME}. How can I assist you?").send()
+    await cl.Message(content=f"Welcome to Blessl Ai Chat! I am {MODEL_NAME}. How can I assist you?").send()
 
 @cl.on_message
 async def on_message(message):
